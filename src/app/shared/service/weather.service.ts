@@ -16,21 +16,23 @@ export class WeatherService extends BaseApi{
     }
 
 
-    getDataWeather(weatherMap): Observable<any>{
+    getDataWeather(): Observable<any>{
         // const url = '//localhost:3000/';
-        //
+
         // return this.http.get(`${url}posts?posts=${weatherMap}`)
         //     .map((response: Response) => {
         //         const data = response.json()
         //         return data;
         //     })
-        
-        const url = 'http://samples.openweathermap.org/data/2.5/weather?id=2172797&appid=b6907d289e10d714a6e88b30761fae22';
+        //
+        const url = 'http://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=b1b15e88fa797225412429c1c50c122a1';
+        //api.openweathermap.org/data/2.5/forecast?id=CITY_ID&units=metric&cnt=30&appid=YOUR-APP-ID
         return this.http.get(`${url}`)
             .map((response: Response) => {
                 const data = response.json()
                 return data;
             })
+
 
         
     }

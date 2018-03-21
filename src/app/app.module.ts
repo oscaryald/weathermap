@@ -18,7 +18,7 @@ import {AppRoutingModule} from './app-routing.module';
     BrowserModule,
       HttpModule,
       BrowserAnimationsModule,
-      AppRoutingModule
+      AppRoutingModule,
       DashboardModule
   ],
   providers: [WeatherService],
