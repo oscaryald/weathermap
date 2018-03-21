@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     this.weatherService.getDataWeather(1)
         .subscribe((data) => {
             this.dataWeather = data;
+            console.log(this.dataWeather)
         })
   }
 
