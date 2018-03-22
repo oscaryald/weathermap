@@ -1,46 +1,24 @@
-import {Http, Response} from "@angular/http";
 import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
+import {HttpClient} from "@angular/common/http";
 
-import {BaseApi} from "../core/base-api";
-
+import {CITIES} from "../city-list/sity-list";
+import {City} from "../model/city.model";
 
 @Injectable()
-export class WeatherService extends BaseApi{
-
+export class WeatherService{
 
     constructor(
-        public http: Http,
-    ){
-        super(http)
+        private http: HttpClient,
+    ){}
+
+    getCities(): City[] {
+            console.log(CITIES)
+        return CITIES
     }
 
-
-    getDataWeather(): Observable<any>{
-        // const url = '//localhost:3000/';
-
-        // return this.http.get(`${url}posts?posts=${weatherMap}`)
-        //     .map((response: Response) => {
-        //         const data = response.json()
-        //         return data;
-        //     })
-        //
-        const url = 'http://samples.openweathermap.org/data/2.5/forecast/daily?id=524901&appid=b1b15e88fa797225412429c1c50c122a1';
-        //api.openweathermap.org/data/2.5/forecast?id=CITY_ID&units=metric&cnt=30&appid=YOUR-APP-ID
-        return this.http.get(`${url}`)
-            .map((response: Response) => {
-                const data = response.json()
-                return data;
-            })
-
-
-        
+    getDataWeather(id){
+        const url = `http://api.openweathermap.org/data/2.5/forecast?id=${id}&units=metric&cnt=30&appid=7bcd39ab5ccaa97088d0b3bc2bf64933`;
+        return this.http.get(`${url}`);
     }
-
-    // getDataWeather(weatherMap): Observable<any>{
-    //     return this.http.get(`posts?posts=${weatherMap}`)
-    // }
-
-
 
 }

@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import {WeatherService} from './shared/service/weather.service';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {AppRoutingModule} from './app-routing.module';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {AppRoutingModule} from './app-routing.module';
       HttpModule,
       BrowserAnimationsModule,
       AppRoutingModule,
-      DashboardModule
+      DashboardModule,
+      HttpClientModule
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

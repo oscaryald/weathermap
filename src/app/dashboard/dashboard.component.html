@@ -1,23 +1,19 @@
 <ul *ngFor="let item of temp">
   <li>
-    <b>day: </b>{{item.day}}
-  </li>
-  <li>
-    <b>min: </b>{{item.min}}
-  </li>
-  <li>
-    <b>max: </b>{{item.max}}
-  </li>
-  <li>
-    <b>night: </b>{{item.night}}
-  </li>
-  <li>
-    <b>eve: </b>{{item.eve}}
-  </li>
-  <li>
-    <b>morn: </b>{{item.morn}}
+    <b>temp: </b>{{item.temp}}
   </li>
 </ul>
+<ul>
+  <li *ngFor="let city of cities" (click)="changeCity(city)">
+      {{city.name}}
+  </li>
+</ul>
+
+<!--<ul>-->
+    <!--<li *ngFor="let d of date" (click)="changeDate(date)">-->
+        <!--{{date}}-->
+    <!--</li>-->
+<!--</ul>-->
 
 <!--<ngx-charts-pie-chart-->
         <!--[view]="view"-->
@@ -30,7 +26,7 @@
 <ngx-charts-line-chart
         [view]="view"
         [scheme]="colorScheme"
-        [results]="multi"
+        [results]="chartData"
 >
 </ngx-charts-line-chart>
 <!--[gradient]="gradient"-->
