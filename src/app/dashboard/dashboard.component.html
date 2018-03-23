@@ -1,19 +1,31 @@
-<ul *ngFor="let item of temp">
-  <li>
-    <b>temp: </b>{{item.temp}}
-  </li>
-</ul>
+<!--<ul *ngFor="let item of temp">-->
+  <!--<li>-->
+    <!--<b>temp: </b>{{item.temp}}-->
+  <!--</li>-->
+<!--</ul>-->
 <ul>
   <li *ngFor="let city of cities" (click)="changeCity(city)">
       {{city.name}}
   </li>
 </ul>
 
-<!--<ul>-->
-    <!--<li *ngFor="let d of date" (click)="changeDate(date)">-->
-        <!--{{date}}-->
-    <!--</li>-->
-<!--</ul>-->
+From:
+<ul>
+    <li *ngFor="let date of datesFrom" (click)="setDateFrom(date.dt_txt)">
+        {{date.dt_txt}}
+    </li>
+</ul>
+
+To:
+<ul>
+    <li *ngFor="let date of datesTo" (click)="setDateTo(date.dt_txt)">
+        {{date.dt_txt}}
+    </li>
+</ul>
+
+<div class="message">
+
+</div>
 
 <!--<ngx-charts-pie-chart-->
         <!--[view]="view"-->
@@ -27,6 +39,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [results]="chartData"
+        [legend]=true
 >
 </ngx-charts-line-chart>
 <!--[gradient]="gradient"-->

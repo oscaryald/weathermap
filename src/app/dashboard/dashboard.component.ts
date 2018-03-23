@@ -11,147 +11,142 @@ import {City} from "../shared/model/city.model";
 
 export class DashboardComponent implements OnInit {
 
-  constructor(private weatherService: WeatherService,
-              ) { }
+  constructor(private weatherService: WeatherService) { }
 
-  dataWeather:any[] = [];
-  temp: WeatherModel[] = [];
+    dataWeather: any[] = [];
+    temp: WeatherModel[] = [];
     chartData: any[] = [];
-
-    cities = []
 
     view: any[] = [700, 400];
 
     colorScheme = {
         domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
-    multi = [
-        {
-            "name": "Germany",
-            "series": [
-                {
-                    "name": "2010",
-                    "value": 7300000
-                },
-                {
-                    "name": "2011",
-                    "value": 8940000
-                }
-            ]
-        },
-        //
-        // {
-        //     "name": "USA",
-        //     "series": [
-        //         {
-        //             "name": "2010",
-        //             "value": 7870000
-        //         },
-        //         {
-        //             "name": "2011",
-        //             "value": 8270000
-        //         }
-        //     ]
-        // },
-        //
-        // {
-        //     "name": "France",
-        //     "series": [
-        //         {
-        //             "name": "2010",
-        //             "value": 5000002
-        //         },
-        //         {
-        //             "name": "2011",
-        //             "value": 5800000
-        //         }
-        //     ]
-        // }
-    ]
-    cityId: number = 0;
-    date: [] = [];
+
+    city: string;
+    dates = [];
+    datesTo = [];
+    datesFrom = [];
+
     from;
     to;
-  ngOnInit() {
-      this.cities = this.weatherService.getCities()
-      this.cityId = this.cities[0].id;
-      this.setDataWeather(this.cityId);
-  }
 
-    setDataWeather(id){
-        this.weatherService.getDataWeather(id)
+    ngOnInit() {
+        this.cities = this.weatherService.getCities();
+        console.log(this.cities)
+        this.setDataWeather(this.cities[0]);
+    }
+
+    setDataWeather(city){
+        this.weatherService.getDataWeather(city.id)
             .subscribe((data) => {
                 this.dataWeather = data.list;
                 this.temp = this.dataWeather.map((item): WeatherModel => {
                     return item.main;
                 });
-                this.date = this.dataWeather.map((item): WeatherModel => {
+                this.dates = this.dataWeather.map((item) => {
                     return item.dt_txt;
                 });
-                this.from = this.date[1];
-                this.to = this.date[this.date.length-1];
-                this.calculateChartData(this.from, this.to)
+                this.from = this.dates[1];
+                this.to = this.dates[this.dates.length-1];
+                this.city = city.name;
+
+                this.calculateChartData1({
+                    name: this.city,
+                    from: this.from,
+                    to: this.to
+                })
                 console.log(data)
-                console.log(this.date)
             })
     }
 
-
-
     changeCity(city: City){
-        console.log(city)
-        this.setDataWeather(city.id)
+        this.city = city.name;
+        this.setDataWeather(city)
     }
-    calculateChartData(from, to){
-        this.chartData = [];
-        let temp = {};
-        const date;
-        this.dataWeather.forEach((t) => {
-            console.log(t.temp)
-            if(t.dt_txt.indexOf(from) !== -1){
-                temp.from = t.main.temp;
-            }
-            if(t.dt_txt.indexOf(to) !== -1){
-                temp.to = t.main.temp;
-            }
-            // console.log(t.temp)
-        });
-        console.log(temp.temp)
-        this.date.forEach((d) => {
-            // console.log(d)
 
-
-
-        });
-
-        this.chartData.push({
-            "name": "Germany",
-            "series": [
-                {
-                    "name": from,
-                    "value": temp.from
-                },
-                {
-                    "name": to,
-                    "value": temp.to
-                }
+    setDateFrom(date = this.dates[0]){
+        this.from = date;
+        this.calculateChartData1({
+            name: this.city,
+            from: this.from,
+            to: this.to
         })
-        console.log(this.chartData)
-        return this.chartData;
+    }
 
-        // {
-        //     "name": "Germany",
-        //     "series": [
-        //     {
-        //         "name": "2010",
-        //         "value": 7300000
-        //     },
-        //     {
-        //         "name": "2011",
-        //         "value": 8940000
-        //     }
-        // ]
-        // },
+    setDateTo(date = this.dates[this.dates.length-1]){
+        this.to = date;
+        this.calculateChartData1({
+            name: this.city,
+            from: this.from,
+            to: this.to
+        })
+        this.setToDefaultDates()
+
+    }
+
+    setToDefaultDates(){
+        this.datesFrom = this.dataWeather.slice(0)
+        this.datesTo = this.dataWeather.slice(this.dates[this.dates.length-1]);
+    }
+
+    calculateChartData1(param){
+        let name = param.name || this.cities[0].name;
+        let from = param.from;
+        let to = param.to;
+
+        let fromIdx: number = 0;
+        let toIdx: number = 0;
+
+
+        const objectTemp = {}
+        const arrTemp = [];
+        const dataWeatherCopy = [];
+
+        this.chartData = [];
+
+        fromIdx = this.dataWeather.findIndex((el, i) =>{
+            return el.dt_txt.indexOf(from) !== -1;
+        });
+        toIdx = this.dataWeather.findIndex((el, i) =>{
+            return el.dt_txt.indexOf(to) !== -1;
+        })
+
+        this.datesFrom = this.dataWeather.slice(0, toIdx-1)
+        this.datesTo = this.dataWeather.slice(fromIdx+1)
+
+        if(fromIdx > toIdx){
+            toIdx = this.dates.length-1
+        }
+
+        console.log(fromIdx, toIdx)
+
+        dataWeatherCopy = this.dataWeather.slice(fromIdx, toIdx);
+        objectTemp['series'] = [];
+
+        console.log(dataWeatherCopy)
+
+        dataWeatherCopy.forEach((el) => {
+            objectTemp.name = name;
+            objectTemp['series'].push(
+                {
+                    "name": el.dt_txt,
+                    "value": el.main.temp
+                }
+            );
+        });
+
+        arrTemp.push(objectTemp);
+        //
+        console.log(arrTemp)
+        return this.chartData = arrTemp;
+
+    }
+
+
+    showMessage({text}){
+        const blockMessage = document.querySelector('.message');
+        blockMessage.innerHTML = text;
     }
 
 }
