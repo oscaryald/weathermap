@@ -4,6 +4,8 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import {DashboardComponent} from './dashboard.component';
 import { TemperatureComponent } from './temperature/temperature.component';
+import { HumidityComponent } from './humidity/humidity.component';
+import {WeatherService} from "../shared/service/weather.service";
 
 @NgModule({
     imports:[
@@ -15,10 +17,11 @@ import { TemperatureComponent } from './temperature/temperature.component';
     ],
     declarations:[
         DashboardComponent,
-        TemperatureComponent
+        TemperatureComponent,
+        HumidityComponent
     ],
     providers:[
-
+        WeatherService
     ]
 })
 export class DashboardModule{

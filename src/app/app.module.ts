@@ -23,7 +23,7 @@ import {HttpClientModule} from "@angular/common/http";
       DashboardModule,
       HttpClientModule
   ],
-  providers: [WeatherService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

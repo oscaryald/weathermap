@@ -3,55 +3,31 @@
     <!--<b>temp: </b>{{item.temp}}-->
   <!--</li>-->
 <!--</ul>-->
-<ul>
-  <li *ngFor="let city of cities" (click)="changeCity(city)">
-      {{city.name}}
-  </li>
-</ul>
 
-From:
-<ul>
-    <li *ngFor="let date of datesFrom" (click)="setDateFrom(date.dt_txt)">
-        {{date.dt_txt}}
-    </li>
-</ul>
+<div>
+<app-temperature [chartData]="chartData"
+                 [datesFrom]="datesFrom"
+                 [datesTo]="datesTo"
+                 [calculateChartData1]="calculateChartData1"
+                 [dates]="dates"
+                 [cities]="cities"
+                 [dataWeather]="dataWeather"
+                 [setDataWeather]="setDataWeather"
+                 [weatherService]="weatherService"
 
-To:
-<ul>
-    <li *ngFor="let date of datesTo" (click)="setDateTo(date.dt_txt)">
-        {{date.dt_txt}}
-    </li>
-</ul>
 
-<div class="message">
-
+></app-temperature>
 </div>
-
-<!--<ngx-charts-pie-chart-->
-        <!--[view]="view"-->
-<!--[results]="data"-->
-<!--[legend]="false"-->
-<!--[labels]="true"-->
-<!--[doughnut]="true"-->
-<!--&gt;-->
-<!--</ngx-charts-pie-chart>-->
-<ngx-charts-line-chart
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="chartData"
-        [legend]=true
->
-</ngx-charts-line-chart>
-<!--[gradient]="gradient"-->
-<!--[xAxis]="showXAxis"-->
-<!--[yAxis]="showYAxis"-->
-<!--[legend]="showLegend"-->
-<!--[showXAxisLabel]="showXAxisLabel"-->
-<!--[showYAxisLabel]="showYAxisLabel"-->
-<!--[xAxisLabel]="xAxisLabel"-->
-<!--[yAxisLabel]="yAxisLabel"-->
-<!--[autoScale]="autoScale"-->
-<!--(select)="onSelect($event)">-->
-
-
-<app-temperature></app-temperature>
+<br>
+<div>
+<app-humidity [chartData]="chartData"
+              [datesFrom]="datesFrom"
+              [datesTo]="datesTo"
+              [calculateChartData1]="calculateChartData1"
+              [dates]="dates"
+              [cities]="cities"
+              [dataWeather]="dataWeather"
+              [setDataWeather]="setDataWeather"
+              [weatherService]="weatherService"
+></app-humidity>
+</div>

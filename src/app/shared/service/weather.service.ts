@@ -12,7 +12,6 @@ export class WeatherService{
     ){}
 
     getCities(): City[] {
-            console.log(CITIES)
         return CITIES
     }
 
