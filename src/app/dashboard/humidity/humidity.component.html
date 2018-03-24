@@ -1,0 +1,30 @@
+<ul>
+  <li *ngFor="let city of cities" (click)="changeCity(city)">
+    {{city.name}}
+  </li>
+</ul>
+
+From:
+<ul>
+  <li *ngFor="let date of datesFrom" (click)="setDateFrom(date.dt_txt)">
+    {{date.dt_txt}}
+  </li>
+</ul>
+
+To:
+<ul>
+  <li *ngFor="let date of datesTo" (click)="setDateTo(date.dt_txt)">
+    {{date.dt_txt}}
+  </li>
+</ul>
+<div>
+<ngx-charts-line-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="chartData"
+        [legend]=true
+        [xAxis]=true
+        [yAxis]=true
+>
+</ngx-charts-line-chart>
+</div>
