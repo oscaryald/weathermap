@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {WeatherService} from '../shared/service/weather.service';
 import {WeatherModel} from "../shared/model/weather.model";
 import {City} from "../shared/model/city.model";
-import {TemperatureComponent} from "./temperature/temperature.component";
 
 
 @Component({
@@ -10,55 +9,45 @@ import {TemperatureComponent} from "./temperature/temperature.component";
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-
 export class DashboardComponent implements OnInit {
 
   constructor(public weatherService: WeatherService) { }
 
     dataWeather: any[] = [];
-    temp: WeatherModel[] = [];
     chartData: any[] = [];
-
-    city: string;
+    city: City;
     dates = [];
     datesTo = [];
     datesFrom = [];
-    cities = [];
-
+    cities: City[] = [];
     from;
     to;
 
-
     ngOnInit() {
         this.cities = this.weatherService.getCities();
-        // this.setDataWeather(this.cities[0]);
     }
 
     setDataWeather(city, weatherParam){
         this.weatherService.getDataWeather(city.id)
             .subscribe((data) => {
                 this.dataWeather = data.list;
-                this.temp = this.dataWeather.map((item): WeatherModel => {
-                    return item.main.temp;
-                });
                 this.dates = this.dataWeather.map((item) => {
                     return item.dt_txt;
                 });
-
                 this.from = this.from || this.dates[1];
                 this.to = this.to || this.dates[this.dates.length-1];
                 this.city = city.name;
 
-                this.calculateChartData1({
+                this.calculateChartData({
                     name: this.city,
                     from: this.from,
                     to: this.to,
                     weatherParam: weatherParam
-                })
-            })
+                });
+            });
     }
 
-    calculateChartData1(param){
+    calculateChartData(param){
         let name = param.name || this.cities[0].name;
         let from = param.from;
         let to = param.to;
@@ -69,7 +58,7 @@ export class DashboardComponent implements OnInit {
         const arrTemp = [];
         let dataWeatherCopy = [];
 
-        this.chartData = [];
+        // this.chartData = [];
 
         fromIdx = this.dataWeather.findIndex((el, i) =>{
             return el.dt_txt.indexOf(from) !== -1;

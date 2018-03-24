@@ -8,12 +8,13 @@ import {City} from "../../shared/model/city.model";
 })
 export class HumidityComponent implements OnInit {
 
-    @Input() dataWeather: any[] = [];
     constructor() { }
+
 
     @Input() chartData;
     @Input() datesFrom;
     @Input() datesTo;
+    @Input() dataWeather;
 
     view: any[] = [700, 400];
 
@@ -23,7 +24,7 @@ export class HumidityComponent implements OnInit {
     @Input() setDataWeather
 
     @Input() weatherService
-    @Input() calculateChartData1
+    @Input() calculateChartData
     @Input() dates
     @Input() cities
 
@@ -38,10 +39,10 @@ export class HumidityComponent implements OnInit {
 
     setDateFrom(date = this.dates[0]){
         this.from = date;
-        this.calculateChartData1({
+        this.calculateChartData({
             name: this.city,
             from: this.from,
-            to: this.to
+            to: this.to,
             weatherParam: this.weatherParam
         })
         console.log(this.dataWeather)
@@ -49,7 +50,7 @@ export class HumidityComponent implements OnInit {
 
     setDateTo(date = this.dates[this.dates.length-1]){
         this.to = date;
-        this.calculateChartData1({
+        this.calculateChartData({
             name: this.city,
             from: this.from,
             to: this.to,

@@ -6,6 +6,8 @@ import {DashboardComponent} from './dashboard.component';
 import { TemperatureComponent } from './temperature/temperature.component';
 import { HumidityComponent } from './humidity/humidity.component';
 import {WeatherService} from "../shared/service/weather.service";
+import { PressureComponent } from './pressure/pressure.component';
+import { WindComponent } from './wind/wind.component';
 
 @NgModule({
     imports:[
@@ -18,7 +20,9 @@ import {WeatherService} from "../shared/service/weather.service";
     declarations:[
         DashboardComponent,
         TemperatureComponent,
-        HumidityComponent
+        HumidityComponent,
+        PressureComponent,
+        WindComponent
     ],
     providers:[
         WeatherService

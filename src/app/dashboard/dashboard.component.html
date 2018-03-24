@@ -8,7 +8,7 @@
 <app-temperature [chartData]="chartData"
                  [datesFrom]="datesFrom"
                  [datesTo]="datesTo"
-                 [calculateChartData1]="calculateChartData1"
+                 [calculateChartData]="calculateChartData"
                  [dates]="dates"
                  [cities]="cities"
                  [dataWeather]="dataWeather"
@@ -23,11 +23,40 @@
 <app-humidity [chartData]="chartData"
               [datesFrom]="datesFrom"
               [datesTo]="datesTo"
-              [calculateChartData1]="calculateChartData1"
+              [calculateChartData]="calculateChartData"
               [dates]="dates"
               [cities]="cities"
               [dataWeather]="dataWeather"
               [setDataWeather]="setDataWeather"
               [weatherService]="weatherService"
 ></app-humidity>
+</div>
+<div>
+    <app-pressure [chartData]="chartData"
+                  [datesFrom]="datesFrom"
+                  [datesTo]="datesTo"
+                  [calculateChartData]="calculateChartData"
+                  [dates]="dates"
+                  [cities]="cities"
+                  [dataWeather]="dataWeather"
+                  [setDataWeather]="setDataWeather"
+                  [weatherService]="weatherService"
+    >
+
+    </app-pressure>
+</div>
+<div>
+    <app-wind [chartData]="chartData"
+              [datesFrom]="datesFrom"
+              [datesTo]="datesTo"
+              [calculateChartData]="calculateChartData"
+              [dates]="dates"
+              [cities]="cities"
+              [dataWeather]="dataWeather"
+              [setDataWeather]="setDataWeather"
+              [weatherService]="weatherService"
+
+    >
+
+    </app-wind>
 </div>

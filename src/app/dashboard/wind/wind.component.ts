@@ -1,15 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {City} from "../../shared/model/city.model";
-import {WeatherModel} from "../../shared/model/weather.model";
 
 @Component({
-  selector: 'app-temperature',
-  templateUrl: './temperature.component.html',
-  styleUrls: ['./temperature.component.css'],
+  selector: 'app-wind',
+  templateUrl: './wind.component.html',
+  styleUrls: ['./wind.component.css']
 })
-export class TemperatureComponent implements OnInit {
+export class WindComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
     @Input() chartData;
     @Input() datesFrom;
@@ -22,16 +21,16 @@ export class TemperatureComponent implements OnInit {
     @Input() dataWeather;
     view: any[] = [700, 400];
     colorScheme = {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+        domain: ['#5AA454']
     };
     from;
     to;
     city;
-    weatherParam = "temp";
+    weatherParam = "wind";
 
-  ngOnInit() {
-      this.setDataWeather(this.cities[0], this.weatherParam)
-  }
+    ngOnInit() {
+        this.setDataWeather(this.cities[0], this.weatherParam)
+    }
 
     setDateFrom(date = this.dates[0]){
         this.from = date;
