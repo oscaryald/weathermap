@@ -1,38 +1,21 @@
-<!--<ul *ngFor="let item of temp">-->
-  <!--<li>-->
-    <!--<b>temp: </b>{{item.temp}}-->
-  <!--</li>-->
-<!--</ul>-->
+<div class="center-wrapper flex-wrapper">
+    <div class="diagram-item">
+    <app-temperature [chartData]="chartData"
+                     [datesFrom]="datesFrom"
+                     [datesTo]="datesTo"
+                     [calculateChartData]="calculateChartData"
+                     [dates]="dates"
+                     [cities]="cities"
+                     [dataWeather]="dataWeather"
+                     [setDataWeather]="setDataWeather"
+                     [weatherService]="weatherService"
+                     [view]="view"
 
-<div>
-<app-temperature [chartData]="chartData"
-                 [datesFrom]="datesFrom"
-                 [datesTo]="datesTo"
-                 [calculateChartData]="calculateChartData"
-                 [dates]="dates"
-                 [cities]="cities"
-                 [dataWeather]="dataWeather"
-                 [setDataWeather]="setDataWeather"
-                 [weatherService]="weatherService"
-
-
-></app-temperature>
-</div>
-<br>
-<div>
-<app-humidity [chartData]="chartData"
-              [datesFrom]="datesFrom"
-              [datesTo]="datesTo"
-              [calculateChartData]="calculateChartData"
-              [dates]="dates"
-              [cities]="cities"
-              [dataWeather]="dataWeather"
-              [setDataWeather]="setDataWeather"
-              [weatherService]="weatherService"
-></app-humidity>
-</div>
-<div>
-    <app-pressure [chartData]="chartData"
+    ></app-temperature>
+    </div>
+    <br>
+    <div class="diagram-item">
+    <app-humidity [chartData]="chartData"
                   [datesFrom]="datesFrom"
                   [datesTo]="datesTo"
                   [calculateChartData]="calculateChartData"
@@ -41,22 +24,38 @@
                   [dataWeather]="dataWeather"
                   [setDataWeather]="setDataWeather"
                   [weatherService]="weatherService"
-    >
+                  [view]="view"
+    ></app-humidity>
+    </div>
+    <div class="diagram-item">
+        <app-pressure [chartData]="chartData"
+                      [datesFrom]="datesFrom"
+                      [datesTo]="datesTo"
+                      [calculateChartData]="calculateChartData"
+                      [dates]="dates"
+                      [cities]="cities"
+                      [dataWeather]="dataWeather"
+                      [setDataWeather]="setDataWeather"
+                      [weatherService]="weatherService"
+                      [view]="view"
+        >
 
-    </app-pressure>
-</div>
-<div>
-    <app-wind [chartData]="chartData"
-              [datesFrom]="datesFrom"
-              [datesTo]="datesTo"
-              [calculateChartData]="calculateChartData"
-              [dates]="dates"
-              [cities]="cities"
-              [dataWeather]="dataWeather"
-              [setDataWeather]="setDataWeather"
-              [weatherService]="weatherService"
+        </app-pressure>
+    </div>
+    <div class="diagram-item">
+        <app-wind [chartData]="chartData"
+                  [datesFrom]="datesFrom"
+                  [datesTo]="datesTo"
+                  [calculateChartData]="calculateChartData"
+                  [dates]="dates"
+                  [cities]="cities"
+                  [dataWeather]="dataWeather"
+                  [setDataWeather]="setDataWeather"
+                  [weatherService]="weatherService"
+                  [view]="view"
 
-    >
+        >
 
-    </app-wind>
+        </app-wind>
+    </div>
 </div>

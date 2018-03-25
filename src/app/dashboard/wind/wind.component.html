@@ -1,32 +1,68 @@
-<ul>
-  <li *ngFor="let city of cities" (click)="changeCity(city)">
-    {{city.name}}
-  </li>
-</ul>
+<div class="text-center" *ngIf="!isLoaded">Loading...</div>
+<div class="diagram-wrapper" *ngIf="isLoaded">
+  <div class="diagram__title">
+    Wind
+  </div>
 
-From:
-<ul>
-  <li *ngFor="let date of datesFrom" (click)="setDateFrom(date.dt_txt)">
-    {{date.dt_txt}}
-  </li>
-</ul>
+  <div class="flex-wrapper">
+    <div class="diagram__date-wrapper flex-wrapper">
+      <div class="form-group">
+        <select class="form-control date"
+                name="datesFrom"
+                id="datesFrom"
+                (change)="setDateFrom($event)"
+        >
+          <option value="0">date</option>
+          <option [value]="date.dt_txt" *ngFor="let date of datesFrom, let idx = index">
+            {{date.dt_txt}}
+          </option>
+        </select>
+        <span class="form-group__to">
+          To:
+        </span>
+      </div>
 
-To:
-<ul>
-  <li *ngFor="let date of datesTo" (click)="setDateTo(date.dt_txt)">
-    {{date.dt_txt}}
-  </li>
-</ul>
 
-<div>
-  <ngx-charts-line-chart
-          [view]="view"
-          [scheme]="colorScheme"
-          [results]="chartData"
-          [legend]=true
-          [xAxis]=true
-          [yAxis]=true
-  >
-  </ngx-charts-line-chart>
+      <div class="form-group">
+        <select class="form-control date"
+                name="datesTo"
+                id="datesTo"
+                (change)="setDateTo($event)"
+        >
+          <option value="0">date</option>
+          <option [value]="date.dt_txt" *ngFor="let date of datesTo, let idx = index">
+            {{date.dt_txt}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="diagram__city">
+      <div class="dropdown" [ngClass]="{'show': show}" (click)="tooggleButton()">
+        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+          {{city.name}}, {{city.country}}
+        </button>
+        <ul class="dropdown-menu">
+          <li class="list-group-item list-group-item-action" *ngFor="let city of cities" (click)="changeCity(city)">
+            {{city.name}}, {{city.country}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+    <ngx-charts-line-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="chartData"
+            [legend]=false
+            [xAxis]=true
+            [yAxis]=true
+    >
+    </ngx-charts-line-chart>
+  </div>
 </div>
+
 

@@ -1,0 +1,99 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all .3s;
+}
+.center-wrapper{
+  max-width: 1400px;
+  margin: 0px auto;
+  padding: 15px;
+}
+.flex-wrapper{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+}
+.container{
+  padding: 20px;
+}
+.date-wrapper{
+  flex-grow: 2;
+}
+.list-group{
+  max-width: 400px;
+}
+.date{
+  max-width: 150px;
+}
+.show{
+
+  .dropdown-menu{
+    display: block;
+    padding: 0;
+  }
+}
+.diagram{
+
+  &-wrapper{
+    margin:0 20px 20px 20px;
+  }
+
+  &__title{
+    display: inline-block;
+    padding: 5px 30px;
+    background: darkblue;
+    color: #fff;
+    font-weight: bold;
+    border-radius:5px;
+    margin-bottom: 20px;
+  }
+}
+.form-group{
+  position: relative;
+  margin-right: 40px;
+
+  &__to{
+    position: absolute;
+    display: inline-block;
+    background: #eee;
+    padding: 7px 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    top:0;
+    right: -40px;
+    text-transform: uppercase;
+    font-weight: bold;
+    height:100%;
+    pointer-events: none;
+  }
+}
+.form-control{
+  color: darkgrey;
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+
+  &:focus{
+    box-shadow:none;
+  }
+
+  &::-ms-expand{
+    display: none;
+  }
+}
+
+.diagram-item{
+  max-width: 800px;
+  margin: 0 20px 40px;
+}
+@media (max-width:1200px) {
+  .diagram-item {
+    margin: 0 auto 40px;
+  }
+  .date {
+    max-width: 120px;
+  }
+}

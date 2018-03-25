@@ -10,64 +10,60 @@ export class HumidityComponent implements OnInit {
 
     constructor() { }
 
-
     @Input() chartData;
     @Input() datesFrom;
     @Input() datesTo;
+    @Input() setDataWeather;
+    @Input() weatherService;
+    @Input() calculateChartData;
+    @Input() dates;
+    @Input() cities;
     @Input() dataWeather;
-
-    view: any[] = [700, 400];
+    @Input() view
 
     colorScheme = {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+        domain: ['#A10A28']
     };
-    @Input() setDataWeather
-
-    @Input() weatherService
-    @Input() calculateChartData
-    @Input() dates
-    @Input() cities
-
-    from
-    to
-    city
-    weatherParam = 'humidity'
+    from;
+    to;
+    city: any;
+    show: boolean = false
+    weatherParam = "humidity";
 
     ngOnInit() {
+
         this.setDataWeather(this.cities[0], this.weatherParam)
     }
 
     setDateFrom(date = this.dates[0]){
-        this.from = date;
+        this.from = date.target.value;
         this.calculateChartData({
-            name: this.city,
+            name: this.city.name,
             from: this.from,
             to: this.to,
             weatherParam: this.weatherParam
-        })
-        console.log(this.dataWeather)
+        });
     }
-
     setDateTo(date = this.dates[this.dates.length-1]){
-        this.to = date;
+        this.to = date.target.value;
         this.calculateChartData({
-            name: this.city,
+            name: this.city.name,
             from: this.from,
             to: this.to,
             weatherParam: this.weatherParam
         })
         this.setToDefaultDates()
     }
-
     setToDefaultDates(){
         this.datesFrom = this.dataWeather.slice(0)
         this.datesTo = this.dataWeather.slice(this.dates[this.dates.length-1]);
     }
-
     changeCity(city: City){
-        this.city = city.name;
-        console.log(this.city)
-        this.setDataWeather(city, this.weatherParam)
+        this.city = city;
+        this.setDataWeather(city, this.weatherParam);
+    }
+    tooggleButton(){
+        this.show = !this.show;
     }
 
 }

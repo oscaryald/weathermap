@@ -19,48 +19,50 @@ export class PressureComponent implements OnInit {
     @Input() dates;
     @Input() cities;
     @Input() dataWeather;
-    view: any[] = [700, 400];
+    @Input() view
+
     colorScheme = {
-        domain: ['#5AA454']
+        domain: ['#C7B42C']
     };
     from;
     to;
-    city;
+    city: any;
+    show: boolean = false
     weatherParam = "pressure";
 
     ngOnInit() {
+
         this.setDataWeather(this.cities[0], this.weatherParam)
     }
 
     setDateFrom(date = this.dates[0]){
-        this.from = date;
+        this.from = date.target.value;
         this.calculateChartData({
-            name: this.city,
+            name: this.city.name,
             from: this.from,
             to: this.to,
             weatherParam: this.weatherParam
-        })
+        });
     }
-
     setDateTo(date = this.dates[this.dates.length-1]){
-        this.to = date;
+        this.to = date.target.value;
         this.calculateChartData({
-            name: this.city,
+            name: this.city.name,
             from: this.from,
             to: this.to,
             weatherParam: this.weatherParam
         })
         this.setToDefaultDates()
     }
-
     setToDefaultDates(){
         this.datesFrom = this.dataWeather.slice(0)
         this.datesTo = this.dataWeather.slice(this.dates[this.dates.length-1]);
     }
-
     changeCity(city: City){
-        this.city = city.name;
-        this.setDataWeather(city, this.weatherParam)
+        this.city = city;
+        this.setDataWeather(city, this.weatherParam);
     }
-
+    tooggleButton(){
+        this.show = !this.show;
+    }
 }
