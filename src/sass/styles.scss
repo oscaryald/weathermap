@@ -75,6 +75,7 @@
   -webkit-appearance: none;
   -moz-appearance:    none;
   appearance:         none;
+  cursor: pointer;
 
   &:focus{
     box-shadow:none;
@@ -89,7 +90,7 @@
   max-width: 800px;
   margin: 0 20px 40px;
 }
-@media (max-width:1200px) {
+@media (max-width:1310px) {
   .diagram-item {
     margin: 0 auto 40px;
   }

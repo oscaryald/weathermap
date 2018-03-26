@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {WeatherService} from '../shared/service/weather.service';
 import {City} from "../shared/model/city.model";
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,9 +18,8 @@ export class DashboardComponent implements OnInit{
     datesTo = [];
     datesFrom = [];
     cities: City[] = [];
-    country;
-    from;
-    to;
+    from = null;
+    to = null;
     isLoaded: boolean = false;
     view: any[] = [560, 400];
 
@@ -36,45 +34,45 @@ export class DashboardComponent implements OnInit{
                 this.dates = this.dataWeather.map((item) => {
                     return item.dt_txt;
                 });
-                this.from = this.from || this.dates[1];
-                this.to = this.to || this.dates[this.dates.length-1];
+                this.from = this.dates[0];
+                this.to = this.dates[this.dates.length-1];
                 this.city = city;
                 this.calculateChartData({
-                    name: this.city['name'],
+                    name: this.city['name'] ,
                     from: this.from,
                     to: this.to,
                     weatherParam: weatherParam
                 });
-                this.isLoaded = true
+                this.isLoaded = true;
             });
     }
 
     calculateChartData(param){
-        let name = param.name || this.cities[0].name;
-        let from = param.from;
-        let to = param.to;
-        let weatherParam = param.weatherParam;
-        let fromIdx: number = 0;
-        let toIdx: number = 0;
-        const objectTemp = {}
-        const arrTemp = [];
-        let dataWeatherCopy = [];
+        let name = param.name || this.cities[0].name,
+            from = param.from,
+            to = param.to,
+            weatherParam = param.weatherParam;
 
-        fromIdx = this.dataWeather.findIndex((el, i) =>{
-            return el.dt_txt.indexOf(from) !== -1;
-        });
-        toIdx = this.dataWeather.findIndex((el, i) =>{
-            return el.dt_txt.indexOf(to) !== -1;
-        })
+        let fromIdx: number = 0,
+            toIdx: number = 0,
+            objectTemp = {},
+            arrTemp = [],
+            dataWeatherCopy = [];
+
+        fromIdx = this.dataWeather.findIndex((el) => el.dt_txt.indexOf(from) !== -1);
+        toIdx = this.dataWeather.findIndex((el) => el.dt_txt.indexOf(to) !== -1);
 
         this.datesFrom = this.dataWeather.slice(0, this.dates.length-1);
-        this.datesTo = this.dataWeather.slice(fromIdx+1)
+        this.datesTo = this.dataWeather.slice(fromIdx+1);
 
         if(fromIdx >= toIdx){
-            toIdx = this.dates.length-1
+            toIdx = this.dates.length-1;
         }
-        console.log(fromIdx, toIdx)
-        dataWeatherCopy = this.dataWeather.slice(fromIdx, toIdx);
+        if(fromIdx < 0){
+            fromIdx = 0;
+        }
+
+        dataWeatherCopy = this.dataWeather.slice(fromIdx, toIdx+1);
         objectTemp['series'] = [];
 
         dataWeatherCopy.forEach((el) => {

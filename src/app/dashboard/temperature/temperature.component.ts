@@ -19,7 +19,7 @@ export class TemperatureComponent implements OnInit {
     @Input() dates;
     @Input() cities;
     @Input() dataWeather;
-    @Input() view
+    @Input() view;
 
     colorScheme = {
         domain: ['#5AA454']
@@ -31,11 +31,10 @@ export class TemperatureComponent implements OnInit {
     weatherParam = "temp";
 
   ngOnInit() {
-
-      this.setDataWeather(this.cities[0], this.weatherParam)
+      this.setDataWeather(this.cities[0], this.weatherParam);
   }
 
-   setDateFrom(date = this.dates[0]){
+   setDateFrom(date){
        this.from = date.target.value;
        this.calculateChartData({
            name: this.city.name,
@@ -44,15 +43,15 @@ export class TemperatureComponent implements OnInit {
            weatherParam: this.weatherParam
        });
    }
-   setDateTo(date = this.dates[this.dates.length-1]){
+   setDateTo(date){
        this.to = date.target.value;
        this.calculateChartData({
            name: this.city.name,
            from: this.from,
            to: this.to,
            weatherParam: this.weatherParam
-       })
-       this.setToDefaultDates()
+       });
+       this.setToDefaultDates();
    }
    setToDefaultDates(){
        this.datesFrom = this.dataWeather.slice(0)
